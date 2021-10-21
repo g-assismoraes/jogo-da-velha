@@ -1,4 +1,4 @@
-function processa(id){
+async function processa(id){
     let espaço = document.getElementById(id)
     let jogador = document.getElementById("iconJogador")
     let tabuleiro = document.getElementById("tabuleiro")
@@ -14,9 +14,11 @@ function processa(id){
         tabuleiro.setAttribute("qtdJogadas", qtdJogadas)
 
         if(confereVitoria()){
+            await sleep(50)
             alert("O jogador " + espaço.getAttribute("jogada") + " venceu!!")
             location.reload()
         }else if (qtdJogadas == 9){
+            await sleep(50)
             alert("Parece que deu velha!!")
             location.reload()
         }
@@ -39,4 +41,8 @@ function confereVitoria(){ //melhorar futuramente
     else if ((espaços[6].getAttribute("jogada") == espaços[4].getAttribute("jogada")) && (espaços[6].getAttribute("jogada") == espaços[2].getAttribute("jogada")) && (espaços[6].getAttribute("jogada") != "")) return true
     
     else return false
+}
+
+function sleep(ms){
+    return new Promise(resolve=> setTimeout(resolve, ms))
 }
